@@ -11,3 +11,5 @@ services:
       - ./STAC:/STAC
     ports:
       - "80:80"
+    env_file:
+      - .env

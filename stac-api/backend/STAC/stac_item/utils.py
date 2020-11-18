@@ -1,4 +1,6 @@
+from typing import Any, Dict
 from config.config import DB
+from . import settings
 
 async def return_date(datetime):
     x = datetime.split("/")
@@ -54,3 +56,26 @@ def poly2bbox(example):
 
     return bbox
     # print(bbox)
+
+async def generate_dynamic_links(item: Dict[str, Any]) -> Dict[str, Any]:
+    self_url = None
+    for link in item["links"]:
+        if link["rel"] == "self":
+            self_url = link["href"]
+            break
+
+    for asset_id, asset in item["assets"].items():
+        item["links"].append({
+                "title": asset["title"],
+                "rel": "tms",
+                "href": settings.TITILER_ENDPOINT + "/stac/tiles/{z}/{x}/{y}.png?url=" + self_url + "&asset=" + asset_id
+            }
+        )
+
+        item["links"].append({
+                "title": asset["title"],
+                "rel": "numpy",
+                "href": settings.TITILER_ENDPOINT + "/stac/tiles/{z}/{x}/{y}.npy?url=" + self_url + "&asset=" + asset_id
+            }
+        )
+    return item

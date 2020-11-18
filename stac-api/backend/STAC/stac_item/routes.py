@@ -9,8 +9,7 @@ from pymongo import MongoClient, GEOSPHERE
 from .models import GeoJSON, RootGet, sphereSearch, \
     cloudSearch, returnItems, mainSearch, addItem, metaModel
 from stac_validator import stac_validator
-
-from .utils import return_date, do_count, getDB, bbox2poly, poly2bbox
+from .utils import return_date, do_count, getDB, bbox2poly, poly2bbox, generate_dynamic_links
 from .pagination import pagination
 from config.config import DB
 
@@ -101,6 +100,8 @@ async def get_items_by_collection_id(collection_id, limit:int=None, bbox0:float=
     ItemA = await item_cursor.to_list(length=limit)
 
     features = ItemA
+    for feature in features:
+        feature = await generate_dynamic_links(feature)
 
     if(count<limit):
         returned = count
@@ -120,6 +121,7 @@ async def get_items_by_item_id(collection_id, item_id):
         item_id = item_id[:-5]
     col = await getDB(collection_id)
     cursor = await col.find_one({"_id": item_id})
+    cursor = await generate_dynamic_links(cursor)
     return cursor
 
 @stac_router.get("/search", response_model=returnItems)
@@ -191,6 +193,8 @@ async def query_stac_get(collections:str=None, limit:int=None, bbox0:float=None,
             feature["properties"]["collection"] = "landsat-8-l1"
         elif col == DB.sentinel_cogs:
             feature["properties"]["collection"] = "sentinel-2-l1c"
+        
+        feature = await generate_dynamic_links(feature)
 
     if(count<limit):
         returned = count
@@ -362,6 +366,8 @@ async def query_stac(mainSearch: mainSearch, page:int=1):
             feature["properties"]["collection"] = "landsat-8-l1"
         elif col == DB.sentinel_cogs:
             feature["properties"]["collection"] = "sentinel-2-l1c"
+        
+        feature = await generate_dynamic_links(feature)
     
     if(count<limit):
         returned = count
