@@ -6,3 +6,4 @@ pytest
 python-dateutil
 stac-validator
 geojson
+python-dotenv

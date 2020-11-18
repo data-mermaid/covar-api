@@ -1,4 +1,9 @@
 from motor.motor_asyncio import AsyncIOMotorClient
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+
 import yaml
 
 def load_config() -> dict:
@@ -8,16 +13,20 @@ def load_config() -> dict:
 
 CONF = load_config()
 
+host1 = os.getenv("HOST")
+port1 = os.getenv("PORT")
+username1 = os.getenv("USER")
+password1 = os.getenv("PASSWORD")
+
 DB_CLIENT = AsyncIOMotorClient(
-    host=CONF.get("databases", dict())["default"]["HOST"],
-    port=CONF.get("databases", dict())["default"]["PORT"],
-    username=CONF.get("databases", dict())["default"]["USER"],
-    password=CONF.get("databases", dict())["default"]["PASSWORD"],
+    host = host1,
+    port = int(port1),
+    username = username1,
+    password = password1,
 )
 
-# DB_CLIENT = AsyncIOMotorClient("mongodb+srv://sparkgeo:emfMx9FYI1IShoV4@cluster0.pszbl.azure.mongodb.net/stac?retryWrites=true&w=majority")
-# DB_CLIENT = AsyncIOMotorClient("mongodb://sparkgeo:sparkgeo@40.85.223.221:27017/stac?authSource=admin")
 DB = DB_CLIENT[CONF.get("databases", dict())["default"]["NAME"]]
 
 def close_db_client():
     DB_CLIENT.close()
+
