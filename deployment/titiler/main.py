@@ -6,7 +6,7 @@ from brotli_asgi import BrotliMiddleware
 
 from . import __version__ as titiler_version
 from . import settings
-from .endpoints import cog, mosaic, stac, tms
+from .endpoints import cog, stac, tms
 from .errors import DEFAULT_STATUS_CODES, add_exception_handlers
 from .middleware import CacheControlMiddleware, LoggerMiddleware, TotalTimeMiddleware
 
@@ -28,7 +28,7 @@ app = FastAPI(
 
 app.include_router(cog.router, prefix="/cog", tags=["Cloud Optimized GeoTIFF"])
 app.include_router(stac.router, prefix="/stac", tags=["SpatioTemporal Asset Catalog"])
-app.include_router(mosaic.router, prefix="/mosaicjson", tags=["MosaicJSON"])
+# app.include_router(mosaic.router, prefix="/mosaicjson", tags=["MosaicJSON"])
 app.include_router(tms.router)
 add_exception_handlers(app, DEFAULT_STATUS_CODES)
 
