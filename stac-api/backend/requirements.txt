@@ -1,0 +1,8 @@
+fastapi[all]
+motor
+stac-pydantic
+pymongo[srv]
+pytest
+python-dateutil
+stac-validator
+geojson

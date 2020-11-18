@@ -1,0 +1,643 @@
+{
+	"info": {
+		"_postman_id": "0e4ba2a2-c2c4-4ec7-a31b-fdb0f42a40b8",
+		"name": "discovery-mongo api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "/stac/",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://discovery-cosmos.azurewebsites.net/stac",
+					"protocol": "https",
+					"host": [
+						"discovery-cosmos",
+						"azurewebsites",
+						"net"
+					],
+					"path": [
+						"stac"
+					]
+				},
+				"description": "GET root catalog"
+			},
+			"response": []
+		},
+		{
+			"name": "/stac/collections",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://discovery-cosmos.azurewebsites.net/stac/collections",
+					"protocol": "https",
+					"host": [
+						"discovery-cosmos",
+						"azurewebsites",
+						"net"
+					],
+					"path": [
+						"stac",
+						"collections"
+					]
+				},
+				"description": "GET all collections"
+			},
+			"response": []
+		},
+		{
+			"name": "/stac/collections/sentinel-s2-l2a-cogs",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://discovery-cosmos.azurewebsites.net/stac/collections/sentinel-s2-l2a-cogs",
+					"protocol": "https",
+					"host": [
+						"discovery-cosmos",
+						"azurewebsites",
+						"net"
+					],
+					"path": [
+						"stac",
+						"collections",
+						"sentinel-s2-l2a-cogs"
+					]
+				},
+				"description": "GET collection by id - sentinel-s2-l2a-cogs"
+			},
+			"response": []
+		},
+		{
+			"name": "/stac/collections/landsat-8-l1-c1",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://discovery-cosmos.azurewebsites.net/stac/collections/landsat-8-l1-c1",
+					"protocol": "https",
+					"host": [
+						"discovery-cosmos",
+						"azurewebsites",
+						"net"
+					],
+					"path": [
+						"stac",
+						"collections",
+						"landsat-8-l1-c1"
+					]
+				},
+				"description": "GET collection by id - landsat-8-l1-c1"
+			},
+			"response": []
+		},
+		{
+			"name": "/stac/collections/radarsat-1",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://discovery-cosmos.azurewebsites.net/stac/collections/radarsat-1",
+					"protocol": "https",
+					"host": [
+						"discovery-cosmos",
+						"azurewebsites",
+						"net"
+					],
+					"path": [
+						"stac",
+						"collections",
+						"radarsat-1"
+					]
+				},
+				"description": "GET collection by id - landsat-8-l1-c1"
+			},
+			"response": []
+		},
+		{
+			"name": "/stac/collections/{collection_id}/items",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://discovery-cosmos.azurewebsites.net/stac/collections/sentinel-s2-l2a-cogs/items?limit=10&datetime=2020-10-08T00:00:54.330495Z/..&bbox0=-110.04&bbox1=35.03&bbox2=-85.96&bbox3=45.95",
+					"protocol": "https",
+					"host": [
+						"discovery-cosmos",
+						"azurewebsites",
+						"net"
+					],
+					"path": [
+						"stac",
+						"collections",
+						"sentinel-s2-l2a-cogs",
+						"items"
+					],
+					"query": [
+						{
+							"key": "limit",
+							"value": "10"
+						},
+						{
+							"key": "datetime",
+							"value": "2020-10-08T00:00:54.330495Z/.."
+						},
+						{
+							"key": "bbox0",
+							"value": "-110.04"
+						},
+						{
+							"key": "bbox1",
+							"value": "35.03"
+						},
+						{
+							"key": "bbox2",
+							"value": "-85.96"
+						},
+						{
+							"key": "bbox3",
+							"value": "45.95"
+						},
+						{
+							"key": "",
+							"value": "",
+							"disabled": true
+						}
+					]
+				},
+				"description": "GET items by collection id, datetime, bbox"
+			},
+			"response": []
+		},
+		{
+			"name": "/stac/collections/{collection_id}/items/{item_id}",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://discovery-cosmos.azurewebsites.net/stac/collections/sentinel-s2-l2a-cogs/items/S2A_1KDV_20180913_0_L2A.json",
+					"protocol": "http",
+					"host": [
+						"discovery-cosmos",
+						"azurewebsites",
+						"net"
+					],
+					"path": [
+						"stac",
+						"collections",
+						"sentinel-s2-l2a-cogs",
+						"items",
+						"S2A_1KDV_20180913_0_L2A.json"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": "",
+							"disabled": true
+						},
+						{
+							"key": "",
+							"value": "",
+							"disabled": true
+						},
+						{
+							"key": "",
+							"value": "",
+							"disabled": true
+						},
+						{
+							"key": "",
+							"value": "",
+							"disabled": true
+						},
+						{
+							"key": "",
+							"value": "",
+							"disabled": true
+						},
+						{
+							"key": "",
+							"value": "",
+							"disabled": true
+						},
+						{
+							"key": "",
+							"value": "",
+							"disabled": true
+						}
+					]
+				},
+				"description": "GET items by collection id, datetime, bbox"
+			},
+			"response": []
+		},
+		{
+			"name": "/stac/search",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://discovery-cosmos.azurewebsites.net/stac/search?limit=1&datetime=2020-08-01T00:00:54.330495Z/..&bbox0=-110.04&bbox1=35.03&bbox2=-85.96&bbox3=45.95&collections=sentinel-s2-l2a-cogs&searchKey=eo:cloud_cover&searchValIntLt=10&searchValIntGt=5",
+					"protocol": "https",
+					"host": [
+						"discovery-cosmos",
+						"azurewebsites",
+						"net"
+					],
+					"path": [
+						"stac",
+						"search"
+					],
+					"query": [
+						{
+							"key": "limit",
+							"value": "1"
+						},
+						{
+							"key": "datetime",
+							"value": "2020-08-01T00:00:54.330495Z/.."
+						},
+						{
+							"key": "bbox0",
+							"value": "-110.04"
+						},
+						{
+							"key": "bbox1",
+							"value": "35.03"
+						},
+						{
+							"key": "bbox2",
+							"value": "-85.96"
+						},
+						{
+							"key": "bbox3",
+							"value": "45.95"
+						},
+						{
+							"key": "collections",
+							"value": "sentinel-s2-l2a-cogs"
+						},
+						{
+							"key": "searchKey",
+							"value": "eo:cloud_cover"
+						},
+						{
+							"key": "searchValStr",
+							"value": null,
+							"disabled": true
+						},
+						{
+							"key": "searchValIntLt",
+							"value": "10"
+						},
+						{
+							"key": "searchValIntGt",
+							"value": "5"
+						}
+					]
+				},
+				"description": "GET items by collection id, datetime, bbox"
+			},
+			"response": []
+		},
+		{
+			"name": "/stac/search pt intersection",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://discovery-cosmos.azurewebsites.net/stac/search?limit=12&datetime=2010-08-01T00:00:54.330495Z/..&ptIntersectA=-135.4&ptIntersectB=60.8&collections=radarsat-1",
+					"protocol": "https",
+					"host": [
+						"discovery-cosmos",
+						"azurewebsites",
+						"net"
+					],
+					"path": [
+						"stac",
+						"search"
+					],
+					"query": [
+						{
+							"key": "limit",
+							"value": "12"
+						},
+						{
+							"key": "datetime",
+							"value": "2010-08-01T00:00:54.330495Z/.."
+						},
+						{
+							"key": "ptIntersectA",
+							"value": "-135.4"
+						},
+						{
+							"key": "ptIntersectB",
+							"value": "60.8"
+						},
+						{
+							"key": "bbox2",
+							"value": "-85.96",
+							"disabled": true
+						},
+						{
+							"key": "bbox3",
+							"value": "45.95",
+							"disabled": true
+						},
+						{
+							"key": "collections",
+							"value": "radarsat-1"
+						},
+						{
+							"key": "searchKey",
+							"value": "eo:cloud_cover",
+							"disabled": true
+						},
+						{
+							"key": "searchValStr",
+							"value": null,
+							"disabled": true
+						},
+						{
+							"key": "searchValIntLt",
+							"value": "10",
+							"disabled": true
+						},
+						{
+							"key": "searchValIntGt",
+							"value": "5",
+							"disabled": true
+						}
+					]
+				},
+				"description": "GET items by collection id, datetime, bbox"
+			},
+			"response": []
+		},
+		{
+			"name": "/stac/search",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"bbox\": [\n    -110.039063,35.029996,-85.957031,45.951150\n  ],\n  \"datetime\": \"2018-12-29T00:00:00Z/2019-01-01T12:31:12Z\",\n  \"intersects\": {\n    \"type\": \"string\",\n    \"coordinates\": [\n      null\n    ]\n  },\n  \"collections\": [\"sentinel-s2-l2a-cogs\"],\n  \"ids\": [\n    \"string\"\n  ],\n  \"properties\": {\n    \"eo:cloud_cover\": {\n      \"gt\": 0,\n      \"lt\": 100\n    },\n    \"platform\":\"sentinel-2b\"\n  },\n  \"limit\": 10\n}",
+					"options": {
+						"raw": {}
+					}
+				},
+				"url": {
+					"raw": "https://discovery-cosmos.azurewebsites.net/stac/search",
+					"protocol": "https",
+					"host": [
+						"discovery-cosmos",
+						"azurewebsites",
+						"net"
+					],
+					"path": [
+						"stac",
+						"search"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": "",
+							"disabled": true
+						}
+					]
+				},
+				"description": "Main search route"
+			},
+			"response": []
+		},
+		{
+			"name": "/stac/search properties",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"collections\": [\"sentinel-s2-l2a-cogs\"],\n  \"limit\": 10,\n  \"properties\": {\n    \"datetime\": \"2020-09-28T16:12:50Z\",\n    \"eo:cloud_cover\": {\n      \"gt\": 0,\n      \"lt\": 100\n    },\n    \"platform\":\"sentinel-2b\"\n  }\n}",
+					"options": {
+						"raw": {}
+					}
+				},
+				"url": {
+					"raw": "https://discovery-cosmos.azurewebsites.net/stac/search",
+					"protocol": "https",
+					"host": [
+						"discovery-cosmos",
+						"azurewebsites",
+						"net"
+					],
+					"path": [
+						"stac",
+						"search"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": "",
+							"disabled": true
+						}
+					]
+				},
+				"description": "Main search route"
+			},
+			"response": []
+		},
+		{
+			"name": "/stac/search sortby",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"collections\": [\"sentinel-s2-l2a-cogs\"],\n  \"limit\": 10,\n  \"datetime\": \"2018-10-31T00:00:00Z/2018-11-01T12:31:12Z\",\n  \"properties\": {\n    \"instruments\": \"msi\",\n    \"sentinel:utm_zone\": 1,\n    \"eo:cloud_cover\": {\n      \"gt\": 0,\n      \"lt\": 2\n    },\n    \"platform\":\"sentinel-2b\"\n  },\n  \"sortby\":[\n    {\n        \"field\":\"timestamp\",\n        \"direction\":\"asc\"\n    }]\n}\n   ",
+					"options": {
+						"raw": {}
+					}
+				},
+				"url": {
+					"raw": "https://discovery-cosmos.azurewebsites.net/stac/search",
+					"protocol": "https",
+					"host": [
+						"discovery-cosmos",
+						"azurewebsites",
+						"net"
+					],
+					"path": [
+						"stac",
+						"search"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": "",
+							"disabled": true
+						}
+					]
+				},
+				"description": "Main search route"
+			},
+			"response": []
+		},
+		{
+			"name": "/stac/search intersects",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"datetime\": \"2018-10-01T00:00:00Z/2018-11-01T12:31:12Z\",\n  \"intersects\": {\n    \"type\": \"Point\",\n    \"coordinates\": [-77.08248138427734, 38.788612962793636]\n  },\n  \"collections\": [\"sentinel-s2-l2a-cogs\"],\n  \"limit\": 100\n}",
+					"options": {
+						"raw": {}
+					}
+				},
+				"url": {
+					"raw": "https://discovery-cosmos.azurewebsites.net/stac/search",
+					"protocol": "https",
+					"host": [
+						"discovery-cosmos",
+						"azurewebsites",
+						"net"
+					],
+					"path": [
+						"stac",
+						"search"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": "",
+							"disabled": true
+						}
+					]
+				},
+				"description": "Main search route"
+			},
+			"response": []
+		},
+		{
+			"name": "/stac/search intersects bbox",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"datetime\": \"2018-10-01T00:00:00Z/2020-11-01T12:31:12Z\",\n  \"intersects\": {\n    \"type\": \"Box\",\n    \"coordinates\": [-92.425796,34.667594,-92.263245,34.775832]\n  },\n  \"properties\": {\n    \"eo:cloud_cover\": {\n      \"gt\": 0,\n      \"lt\": 10\n    }\n  },\n  \"collections\": [\"sentinel-s2-l2a-cogs\"],\n  \"limit\": 100\n}",
+					"options": {
+						"raw": {}
+					}
+				},
+				"url": {
+					"raw": "https://discovery-cosmos.azurewebsites.net/stac/search",
+					"protocol": "https",
+					"host": [
+						"discovery-cosmos",
+						"azurewebsites",
+						"net"
+					],
+					"path": [
+						"stac",
+						"search"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": "",
+							"disabled": true
+						}
+					]
+				},
+				"description": "Main search route"
+			},
+			"response": []
+		},
+		{
+			"name": "/stac/dev/searchCloud",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"collection_id\": \"sentinel-s2-l2a-cogs\",\n  \"limit\": 10,\n  \"cloud_cover\": 10,\n  \"bbox\": [\n    -110.039063,35.029996,-85.957031,45.951150\n  ],\n  \"start_date\": \"2018-10-31T00:00:00Z\",\n  \"end_date\": \"2018-11-01T12:31:12Z\"\n}"
+				},
+				"url": {
+					"raw": "https://discovery-cosmos.azurewebsites.net/stac/dev/searchCloud",
+					"protocol": "https",
+					"host": [
+						"discovery-cosmos",
+						"azurewebsites",
+						"net"
+					],
+					"path": [
+						"stac",
+						"dev",
+						"searchCloud"
+					]
+				},
+				"description": "Slimmed down search for rastervision"
+			},
+			"response": []
+		},
+		{
+			"name": "/stac/dev/spheretest",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"limit\": 1000,\n  \"collections\": \"sentinel-s2-l2a-cogs\",\n  \"point_coordinates\": [\n    -98.1, 37.2\n  ],\n  \"distance\": 0.1\n}"
+				},
+				"url": {
+					"raw": "https://discovery-cosmos.azurewebsites.net/stac/dev/spheretest",
+					"protocol": "https",
+					"host": [
+						"discovery-cosmos",
+						"azurewebsites",
+						"net"
+					],
+					"path": [
+						"stac",
+						"dev",
+						"spheretest"
+					]
+				},
+				"description": "Search a sphere."
+			},
+			"response": []
+		},
+		{
+			"name": "/stac/dev/addItem",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"collection\": \"hack\",\n  \"item\": {\n  \"stac_version\": \"1.0.0-beta.2\",\n  \"stac_extensions\": [],\n  \"type\": \"Feature\",\n  \"id\": \"CS3-20160503_132130_04\",\n  \"bbox\": [-122.59750209, 37.48803556, -122.2880486, 37.613537207],\n  \"geometry\": {\n    \"type\": \"Polygon\",\n    \"coordinates\": [\n      [\n        [-122.308150179, 37.488035566],\n        [-122.597502109, 37.538869539],\n        [-122.576687533, 37.613537207],\n        [-122.288048600, 37.562818007],\n        [-122.308150179, 37.488035566]\n      ]\n    ]\n  },\n  \"properties\": {\n    \"datetime\": \"2016-05-03T13:21:30.040Z\",\n    \"collection\": \"CS3\"\n  },\n  \"links\": [\n    {\n      \"rel\": \"self\",\n      \"href\": \"http://cool-sat.com/catalog/CS3-20160503_132130_04/CS3-20160503_132130_04.json\"\n    },\n    {\n      \"rel\": \"collection\",\n      \"href\": \"http://cool-sat.com/catalog.json\"\n    }\n  ],\n  \"assets\": {\n    \"analytic\": {\n      \"href\": \"relative-path/to/analytic.tif\",\n      \"title\": \"4-Band Analytic\"\n    },\n    \"thumbnail\": {\n      \"href\": \"http://cool-sat.com/catalog/CS3-20160503_132130_04/thumbnail.png\",\n      \"title\": \"Thumbnail\",\n      \"roles\": [ \"thumbnail\" ]\n    }\n  }\n }\n}"
+				},
+				"url": {
+					"raw": "https://discovery-cosmos.azurewebsites.net/stac/dev/addItem",
+					"protocol": "https",
+					"host": [
+						"discovery-cosmos",
+						"azurewebsites",
+						"net"
+					],
+					"path": [
+						"stac",
+						"dev",
+						"addItem"
+					]
+				},
+				"description": "Search a sphere."
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
