@@ -1,20 +1,7 @@
 fastapi:
   debug: true
 databases:
-  # default:
-  #   ENGINE: 'mongodb'
-  #   DRIVER: 'motor'
-  #   NAME: 'stac'
-  #   USER: 'sparkgeo'
-  #   PASSWORD: 'emfMx9FYI1IShoV4'
-  #   HOST: 'cluster0.pszbl.azure.mongodb.net/stac'
-  #   PORT: 27017
-
   default:
     ENGINE: mongodb
     DRIVER: motor
     NAME: stac
-    USER: sparkgeo
-    PASSWORD: sparkgeo
-    HOST: 40.85.223.221
-    PORT: 27017
