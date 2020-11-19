@@ -8,9 +8,6 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
 
-    env:
-
-
     steps:
       - uses: actions/checkout@v2
       - uses: actions/checkout@v2
