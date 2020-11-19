@@ -19,6 +19,10 @@ jobs:
           repository: developmentseed/titiler
           path: titiler
       
+      - run: |
+          ls -al
+          ls -al titiler
+      
       - uses: actions/setup-node@v1
         with:
           node-version: '12'
@@ -31,7 +35,7 @@ jobs:
           python-version: 3.7
       
       - name: pip install
-        run: pip install -e .["deploy"]
+        run: cd titiler && pip install -e .["deploy"]
 
       - name: Deploy the lambda stack.
         run: cdk synth titiler-lambda-dev
