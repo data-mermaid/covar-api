@@ -66,14 +66,14 @@ async def generate_dynamic_links(item: Dict[str, Any]) -> Dict[str, Any]:
 
     for asset_id, asset in item["assets"].items():
         item["links"].append({
-                "title": asset["title"],
+                "title": asset.get("title"),
                 "rel": "tms",
                 "href": settings.TITILER_ENDPOINT + "/stac/tiles/{z}/{x}/{y}.png?url=" + self_url + "&asset=" + asset_id
             }
         )
 
         item["links"].append({
-                "title": asset["title"],
+                "title": asset.get("title"),
                 "rel": "numpy",
                 "href": settings.TITILER_ENDPOINT + "/stac/tiles/{z}/{x}/{y}.npy?url=" + self_url + "&asset=" + asset_id
             }
