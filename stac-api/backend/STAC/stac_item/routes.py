@@ -124,7 +124,7 @@ async def get_items_by_item_id(collection_id, item_id):
     cursor = await generate_dynamic_links(cursor)
     return cursor
 
-@stac_router.get("/search", response_model=returnItems)
+@stac_router.get("/search", response_model=dict)
 async def query_stac_get(collections:str=None, limit:int=None, bbox0:float=None, 
     bbox1:float=None, bbox2:float=None, bbox3:float=None, datetime:str=None, 
     searchKey:str=None, searchValStr:str=None, searchValIntLt:int=None, 
@@ -178,49 +178,60 @@ async def query_stac_get(collections:str=None, limit:int=None, bbox0:float=None,
     queries = {}
     for filter in filters:
         queries.update(**filter)
-
-    col = await getDB(collections)
-
-    count = await do_count(collections, queries, limit)
-    item_cursor = col.find(queries).skip(skips).limit(limit) 
-    ItemA = await item_cursor.to_list(length=limit)
-
-    features = ItemA
-
-    for feature in features:
-        if col == DB.landsat:
-            feature["collection"] = "landsat-8-l1"
-            feature["properties"]["collection"] = "landsat-8-l1"
-        elif col == DB.sentinel_cogs:
-            feature["properties"]["collection"] = "sentinel-2-l1c"
-        
-        feature = await generate_dynamic_links(feature)
-
-    if(count<limit):
-        returned = count
-    else:
-        returned = limit
-
-    bboxX = [bbox0, bbox1, bbox2, bbox3]
-    typeInter = "Point"
     
-    if(bbox0 != None):
-        linkList = pagination(datetime, limit, page, collections, bboxX)
-    elif(ptIntersectA != None and ptIntersectB != None):
-        coordInter = [ptIntersectA, ptIntersectB]
-        linkList = pagination(datetime, limit, page, collections, None, typeInter, coordInter)
+    collections_list = []
+    if collections is None:
+        collections_list = ["landsat"]
     else:
-        linkList = pagination(datetime, limit, page, collections)
-    prev = linkList[0]
-    next = linkList[1]
+        collections_list = collections.split(",")   
+    results = dict()
 
-    ''' Page pagination - END '''
+    for collection_id in collections_list:
 
-    meta = {'next': next, 'previous': prev, 'count': count, 'limit': limit}
-    Dict = {'numberMatched': count, 'numberReturned':returned, 'meta':meta, 'features': features}
-    return Dict
+        col = await getDB(collection_id)
 
-@stac_router.post("/search", response_model=returnItems)
+        count = await do_count(collection_id, queries, limit)
+        item_cursor = col.find(queries).skip(skips).limit(limit) 
+        ItemA = await item_cursor.to_list(length=limit)
+
+        features = ItemA
+
+        for feature in features:
+            if col == DB.landsat:
+                feature["collection"] = "landsat-8-l1"
+                feature["properties"]["collection"] = "landsat-8-l1"
+            elif col == DB.sentinel_cogs:
+                feature["properties"]["collection"] = "sentinel-2-l1c"
+            
+            feature = await generate_dynamic_links(feature)
+
+        if(count<limit):
+            returned = count
+        else:
+            returned = limit
+
+        bboxX = [bbox0, bbox1, bbox2, bbox3]
+        typeInter = "Point"
+        
+        if(bbox0 != None):
+            linkList = pagination(datetime, limit, page, collection_id, bboxX)
+        elif(ptIntersectA != None and ptIntersectB != None):
+            coordInter = [ptIntersectA, ptIntersectB]
+            linkList = pagination(datetime, limit, page, collection_id, None, typeInter, coordInter)
+        else:
+            linkList = pagination(datetime, limit, page, collection_id)
+        prev = linkList[0]
+        next = linkList[1]
+
+        ''' Page pagination - END '''
+
+        meta = {'next': next, 'previous': prev, 'count': count, 'limit': limit}
+        Dict = {'numberMatched': count, 'numberReturned':returned, 'meta':meta, 'features': features}
+
+        results[collection_id] = Dict
+    return results
+
+@stac_router.post("/search", response_model=dict)
 async def query_stac(mainSearch: mainSearch, page:int=1):
     """[summary]
     Search STAC items on datetime, properties, intersects etc.
@@ -327,66 +338,72 @@ async def query_stac(mainSearch: mainSearch, page:int=1):
     queries = {}
     for filter in filters:
         queries.update(**filter)
- 
+    
+    collections = []
     if(mainSearch.collections):
-        collection_id = mainSearch.collections[0]
+        collections = mainSearch.collections
     else:
-        collection_id = 'landsat'
+        collections = ['landsat']
+    results = {}
+    
+    for collection_id in collections:
+        col = await getDB(collection_id)
 
-    col = await getDB(collection_id)
+        count = await do_count(collection_id, queries, limit)
 
-    count = await do_count(collection_id, queries, limit)
+        ''' --- sortby --- '''
+        if(mainSearch.sortby):
+            sortlist = ()
+            for sort in mainSearch.sortby:
 
-    ''' --- sortby --- '''
-    if(mainSearch.sortby):
-        sortlist = ()
-        for sort in mainSearch.sortby:
-
-            if(sort.field != 'string' and sort.field != None):
-                if(sort.field == 'timestamp'):
-                    sort.field = 'properties.datetime'
-                if(sort.direction == 'asc'):
-                    item_cursor = col.find(queries).sort(sort.field, 1).skip(skips).limit(limit)
-                    break
+                if(sort.field != 'string' and sort.field != None):
+                    if(sort.field == 'timestamp'):
+                        sort.field = 'properties.datetime'
+                    if(sort.direction == 'asc'):
+                        item_cursor = col.find(queries).sort(sort.field, 1).skip(skips).limit(limit)
+                        break
+                    else:
+                        item_cursor = col.find(queries).sort(sort.field, -1).skip(skips).limit(limit)   
+                        break
                 else:
-                    item_cursor = col.find(queries).sort(sort.field, -1).skip(skips).limit(limit)   
-                    break
-            else:
-                item_cursor = col.find(queries).skip(skips).limit(limit)
-    else:
-        item_cursor = col.find(queries).skip(skips).limit(limit)
-    
-    ItemA = await item_cursor.to_list(length=limit)
-    
-    features = ItemA
-    
-    for feature in features:
-        if col == DB.landsat:
-            feature["collection"] = "landsat-8-l1"
-            feature["properties"]["collection"] = "landsat-8-l1"
-        elif col == DB.sentinel_cogs:
-            feature["properties"]["collection"] = "sentinel-2-l1c"
+                    item_cursor = col.find(queries).skip(skips).limit(limit)
+        else:
+            item_cursor = col.find(queries).skip(skips).limit(limit)
         
-        feature = await generate_dynamic_links(feature)
-    
-    if(count<limit):
-        returned = count
-    else:
-        returned = limit
+        ItemA = await item_cursor.to_list(length=limit)
+        
+        features = ItemA
+        
+        for feature in features:
+            if col == DB.landsat:
+                feature["collection"] = "landsat-8-l1"
+                feature["properties"]["collection"] = "landsat-8-l1"
+            elif col == DB.sentinel_cogs:
+                feature["properties"]["collection"] = "sentinel-2-l1c"
+            
+            feature = await generate_dynamic_links(feature)
+        
+        if(count<limit):
+            returned = count
+        else:
+            returned = limit
 
-    if(mainSearch.bbox and mainSearch.bbox[0] != 0):
-        linkList = pagination(datetime, limit, page, collection_id, mainSearch.bbox)
-    elif(mainSearch.intersects and mainSearch.intersects.type != 'string'):
-        linkList = pagination(datetime, limit, page, collection_id, None, mainSearch.intersects.type, mainSearch.intersects.coordinates)
-    else:
-        linkList = pagination(datetime, limit, page, collection_id)
-    prev = linkList[0]
-    next = linkList[1]
-    ''' Page pagination - END '''
-    
-    meta = {'next': next, 'previous': prev, 'count': count, 'limit': limit}
-    Dict = {'numberMatched': count, 'numberReturned':returned, 'meta': meta, 'features': features}
-    return Dict
+        if(mainSearch.bbox and mainSearch.bbox[0] != 0):
+            linkList = pagination(datetime, limit, page, collection_id, mainSearch.bbox)
+        elif(mainSearch.intersects and mainSearch.intersects.type != 'string'):
+            linkList = pagination(datetime, limit, page, collection_id, None, mainSearch.intersects.type, mainSearch.intersects.coordinates)
+        else:
+            linkList = pagination(datetime, limit, page, collection_id)
+        prev = linkList[0]
+        next = linkList[1]
+        ''' Page pagination - END '''
+        
+        meta = {'next': next, 'previous': prev, 'count': count, 'limit': limit}
+        Dict = {'numberMatched': count, 'numberReturned':returned, 'meta': meta, 'features': features}
+
+        results[collection_id] = Dict
+
+    return results
     
 ''' *** DEV ROUTES *** '''
 
