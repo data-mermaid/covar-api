@@ -1,0 +1,37 @@
+name: Lambda Dev
+
+on:
+  push:
+    branches: [ dev ]
+
+jobs:
+  deploy:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+    env:
+      STACK_NAME: covar-api-titiler-dev
+      STACK_STAGE: dev
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+        with:
+          repository: https://github.com/developmentseed/titiler.git
+      
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '12'
+      
+      - name: Install CDK
+        run: npm install -g aws-cdk
+      
+      - uses: actions/setup-python@v2
+        with:
+          python-version: 3.7
+      
+      - name: pip install
+        run: pip install -e .["deploy"]
+
+      - name: Run a multi-line script
+        run: cdk deploy titiler-lambda-dev
