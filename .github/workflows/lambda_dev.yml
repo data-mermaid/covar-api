@@ -14,8 +14,10 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+      - uses: actions/checkout@v2
         with:
           repository: developmentseed/titiler
+          path: titiler
       
       - uses: actions/setup-node@v1
         with:
@@ -32,4 +34,4 @@ jobs:
         run: pip install -e .["deploy"]
 
       - name: Deploy the lambda stack.
-        run: cdk deploy titiler-lambda-dev
+        run: cdk synth titiler-lambda-dev
