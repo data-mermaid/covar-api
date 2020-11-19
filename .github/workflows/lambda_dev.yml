@@ -1,0 +1,45 @@
+name: Lambda Dev
+
+on:
+  push:
+    branches: [ dev ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    env:
+      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      AWS_DEFAULT_REGION: 'us-east-1'
+      
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/checkout@v2
+        with:
+          repository: developmentseed/titiler
+          path: titiler
+      
+      - run: |
+          ls -al
+          ls -al titiler
+      
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '12'
+      
+      - name: Install CDK
+        run: npm install -g aws-cdk
+      
+      - uses: actions/setup-python@v2
+        with:
+          python-version: 3.7
+      
+      - name: pip install
+        run: |
+          cd titiler && pip install -e .["deploy"]
+          pip install aws-cdk.aws_apigatewayv2_integrations
+
+      - name: Deploy the lambda stack.
+        run: cdk deploy titiler-lambda-dev
