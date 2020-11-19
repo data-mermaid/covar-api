@@ -168,7 +168,7 @@ class titilerECSStack(core.Stack):
                 image=ecs.ContainerImage.from_asset(
                     code_dir,
                     exclude=["cdk.out", ".git"],
-                    file="Dockerfiles/ecs/Dockerfile",
+                    file="titiler/Dockerfiles/ecs/Dockerfile",
                 ),
                 container_port=80,
                 environment=task_env,
@@ -203,66 +203,3 @@ class titilerECSStack(core.Stack):
             ),
             description="Allows traffic on port 80 from NLB",
         )
-
-
-app = core.App()
-
-perms = []
-if settings.buckets:
-    perms.append(
-        iam.PolicyStatement(
-            actions=["s3:GetObject", "s3:HeadObject"],
-            resources=[f"arn:aws:s3:::{bucket}*" for bucket in settings.buckets],
-        )
-    )
-
-# # If you use dynamodb mosaic backend you should add IAM roles to read/put Item and maybe create Table
-# stack = core.Stack()
-# perms.append(
-#     iam.PolicyStatement(
-#         actions=[
-#             "dynamodb:GetItem",
-#             "dynamodb:PutItem",
-#             "dynamodb:CreateTable",
-#             "dynamodb:Scan",
-#             "dynamodb:BatchWriteItem",
-#         ],
-#         resources=[f"arn:aws:dynamodb:{stack.region}:{stack.account}:table/*"],
-#     )
-# )
-
-
-# Tag infrastructure
-for key, value in {
-    "Project": settings.name,
-    "Stack": settings.stage,
-    "Owner": settings.owner,
-    "Client": settings.client,
-}.items():
-    if value:
-        core.Tag.add(app, key, value)
-
-ecs_stackname = f"{settings.name}-ecs-{settings.stage}"
-titilerECSStack(
-    app,
-    ecs_stackname,
-    cpu=settings.task_cpu,
-    memory=settings.task_memory,
-    mincount=settings.min_ecs_instances,
-    maxcount=settings.max_ecs_instances,
-    permissions=perms,
-    env=settings.additional_env,
-)
-
-lambda_stackname = f"{settings.name}-lambda-{settings.stage}"
-titilerLambdaStack(
-    app,
-    lambda_stackname,
-    memory=settings.memory,
-    timeout=settings.timeout,
-    concurrent=settings.max_concurrent,
-    permissions=perms,
-    env=settings.additional_env,
-)
-
-app.synth()

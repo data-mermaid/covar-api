@@ -35,7 +35,9 @@ jobs:
           python-version: 3.7
       
       - name: pip install
-        run: cd titiler && pip install -e .["deploy"]
+        run: |
+          cd titiler && pip install -e .["deploy"]
+          pip install aws-cdk.aws_apigatewayv2_integrations
 
       - name: Deploy the lambda stack.
         run: cdk synth titiler-lambda-dev
