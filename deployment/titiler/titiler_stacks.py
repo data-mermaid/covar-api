@@ -12,7 +12,7 @@ from aws_cdk import aws_ecs as ecs
 from aws_cdk import aws_ecs_patterns as ecs_patterns
 from aws_cdk import aws_iam as iam
 from aws_cdk import aws_lambda, core
-from config import StackSettings
+from deployment.titiler.config import StackSettings
 
 settings = StackSettings()
 
