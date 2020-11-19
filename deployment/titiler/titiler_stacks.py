@@ -99,7 +99,7 @@ class titilerLambdaStack(core.Stack):
         print("Building docker image...")
         client.images.build(
             path=code_dir,
-            dockerfile="titiler/Dockerfiles/lambda/Dockerfile",
+            dockerfile="Dockerfiles/lambda/Dockerfile",
             tag="titiler-lambda:latest",
             rm=True,
         )
@@ -169,7 +169,7 @@ class titilerECSStack(core.Stack):
                 image=ecs.ContainerImage.from_asset(
                     code_dir,
                     exclude=["cdk.out", ".git"],
-                    file="titiler/Dockerfiles/ecs/Dockerfile",
+                    file="Dockerfiles/ecs/Dockerfile",
                 ),
                 container_port=80,
                 environment=task_env,
