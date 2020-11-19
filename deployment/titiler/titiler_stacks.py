@@ -128,7 +128,6 @@ class titilerECSStack(core.Stack):
         mincount: int = 1,
         maxcount: int = 50,
         permissions: Optional[List[iam.PolicyStatement]] = None,
-        env: dict = {},
         code_dir: str = "./titiler/",
         **kwargs: Any,
     ) -> None:
@@ -153,8 +152,6 @@ class titilerECSStack(core.Stack):
             task_env.update({"MAX_WORKERS": str(settings.max_workers)})
         if settings.web_concurrency:
             task_env.update({"WEB_CONCURRENCY": str(settings.web_concurrency)})
-
-        task_env.update(env)
 
         fargate_service = ecs_patterns.ApplicationLoadBalancedFargateService(
             self,
