@@ -50,17 +50,15 @@ class titilerLambdaStack(core.Stack):
         concurrent: Optional[int] = None,
         permissions: Optional[List[iam.PolicyStatement]] = None,
         layer_arn: Optional[str] = None,
-        env: dict = {},
         code_dir: str = "./titiler/",
         **kwargs: Any,
     ) -> None:
         """Define stack."""
-        super().__init__(scope, id, *kwargs)
+        super().__init__(scope, id, **kwargs)
 
         permissions = permissions or []
 
         lambda_env = DEFAULT_ENV.copy()
-        lambda_env.update(env)
 
         lambda_function = aws_lambda.Function(
             self,
@@ -132,7 +130,7 @@ class titilerECSStack(core.Stack):
         **kwargs: Any,
     ) -> None:
         """Define stack."""
-        super().__init__(scope, id, *kwargs)
+        super().__init__(scope, id, **kwargs)
 
         permissions = permissions or []
 
