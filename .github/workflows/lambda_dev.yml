@@ -8,6 +8,12 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
 
+    env:
+      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      AWS_DEFAULT_REGION: 'us-east-1'
+      
+
     steps:
       - uses: actions/checkout@v2
       - uses: actions/checkout@v2
@@ -35,14 +41,5 @@ jobs:
           cd titiler && pip install -e .["deploy"]
           pip install aws-cdk.aws_apigatewayv2_integrations
 
-      - name: cdk deploy
-        uses: youyo/aws-cdk-github-actions@v1
-        with:
-          cdk_subcommand: 'deploy'
-          cdk_stack: 'titiler-lambda-dev'
-          cdk_args: '--require-approval never'
-          actions_comment: false
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          AWS_DEFAULT_REGION: 'us-east-1'
+      - name: Deploy the lambda stack.
+        run: cdk deploy titiler-lambda-dev
