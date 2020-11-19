@@ -1,4 +1,5 @@
 """STACK Configs."""
+https://github.com/developmentseed/titiler/blob/master/stack/config.py
 
 from typing import Dict, List, Optional
 

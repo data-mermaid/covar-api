@@ -5,6 +5,7 @@ from typing import Any, List, Optional, Union
 
 import docker
 from aws_cdk import aws_apigatewayv2 as apigw
+from aws_cdk import aws_apigatewayv2_integrations as apigw_int
 from aws_cdk import aws_ec2 as ec2
 from aws_cdk import aws_ecs as ecs
 from aws_cdk import aws_ecs_patterns as ecs_patterns
@@ -85,7 +86,7 @@ class titilerLambdaStack(core.Stack):
         api = apigw.HttpApi(
             self,
             f"{id}-endpoint",
-            default_integration=apigw.LambdaProxyIntegration(handler=lambda_function),
+            default_integration=apigw_int.LambdaProxyIntegration(handler=lambda_function),
         )
         core.CfnOutput(self, "Endpoint", value=api.url)
 
@@ -97,7 +98,7 @@ class titilerLambdaStack(core.Stack):
         print("Building docker image...")
         client.images.build(
             path=code_dir,
-            dockerfile="Dockerfiles/lambda/Dockerfile",
+            dockerfile="titiler/Dockerfiles/lambda/Dockerfile",
             tag="titiler-lambda:latest",
             rm=True,
         )

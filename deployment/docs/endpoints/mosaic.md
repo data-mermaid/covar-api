@@ -1,3 +1,0 @@
-# MosaicJSON
-
-placeholder
