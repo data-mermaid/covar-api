@@ -41,6 +41,8 @@ for key, value in {
     if value:
         core.Tag.add(app, key, value)
 
+DEPLOY_ENV = core.Environment(account='138863487738', region='us-east-1')
+
 ecs_stackname = f"{settings.name}-ecs-{settings.stage}"
 titilerECSStack(
     app,
@@ -50,7 +52,7 @@ titilerECSStack(
     mincount=settings.min_ecs_instances,
     maxcount=settings.max_ecs_instances,
     permissions=perms,
-    env=settings.additional_env,
+    env=DEPLOY_ENV
 )
 
 lambda_stackname = f"{settings.name}-lambda-{settings.stage}"
@@ -61,7 +63,7 @@ titilerLambdaStack(
     timeout=settings.timeout,
     concurrent=settings.max_concurrent,
     permissions=perms,
-    env=settings.additional_env,
+    env=DEPLOY_ENV
 )
 
 app.synth()

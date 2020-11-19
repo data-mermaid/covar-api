@@ -15,8 +15,6 @@ class StackSettings(pydantic.BaseSettings):
     owner: Optional[str]
     client: Optional[str]
 
-    additional_env: Dict = {}
-
     buckets: List = []
 
     #########
