@@ -7,10 +7,6 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    
-    env:
-      STACK_NAME: covar-api-titiler-dev
-      STACK_STAGE: dev
 
     steps:
       - uses: actions/checkout@v2

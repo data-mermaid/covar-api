@@ -10,7 +10,7 @@ class StackSettings(pydantic.BaseSettings):
     """Application settings"""
 
     name: str = "titiler"
-    stage: str = "development"
+    stage: str = "dev"
 
     owner: Optional[str]
     client: Optional[str]
