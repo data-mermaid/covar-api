@@ -36,4 +36,4 @@ jobs:
           pip install aws-cdk.aws_apigatewayv2_integrations
 
       - name: Deploy the lambda stack.
-        run: cdk synth titiler-lambda-dev
+        run: cdk deploy titiler-lambda-dev
