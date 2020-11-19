@@ -51,7 +51,7 @@ class titilerLambdaStack(core.Stack):
         permissions: Optional[List[iam.PolicyStatement]] = None,
         layer_arn: Optional[str] = None,
         env: dict = {},
-        code_dir: str = "./",
+        code_dir: str = "./titiler/",
         **kwargs: Any,
     ) -> None:
         """Define stack."""
@@ -129,7 +129,7 @@ class titilerECSStack(core.Stack):
         maxcount: int = 50,
         permissions: Optional[List[iam.PolicyStatement]] = None,
         env: dict = {},
-        code_dir: str = "./",
+        code_dir: str = "./titiler/",
         **kwargs: Any,
     ) -> None:
         """Define stack."""
