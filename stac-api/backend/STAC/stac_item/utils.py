@@ -43,7 +43,8 @@ async def getDB(collection_id):
 # sentinel-s2-l2a-cogs sentinel-2-l1c radarsat-1
 def bbox2poly(b0, b1, b2, b3):
     poly = [[
-        [b0,b1],[b2,b1],[b2,b3],[b0,b3],[b0,b1]
+        # [b0,b1],[b2,b1],[b2,b3],[b0,b3],[b0,b1]
+        [b0,b1],[b0,b3],[b2,b3],[b2,b1],[b0,b1]
     ]]
     return poly
 

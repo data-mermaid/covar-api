@@ -268,9 +268,21 @@ async def query_stac(mainSearch: mainSearch, page:int=1):
         bbox = mainSearch.bbox
         poly = bbox2poly(bbox[0], bbox[1], bbox[2], bbox[3])
         bbox_filter = {
-            "geometry": {"$geoIntersects": { "$geometry": { "type": 'Polygon' , "coordinates": poly }}}
+            "geometry": {
+                "$geoIntersects": {
+                    "$geometry": {
+                        "type": "Polygon",
+                        "coordinates": poly,
+                        "crs": {
+                            "type": "name",
+                            "properties": {
+                                "name": "urn:x-mongodb:crs:strictwinding:EPSG:4326"
+                            }
+                        }
+                    }
+                }
+            }
         }
-        
         filters.append(bbox_filter)
 
     if(mainSearch.datetime and mainSearch.datetime != 'string'):
