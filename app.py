@@ -1,35 +1,11 @@
 from aws_cdk import core, aws_iam as iam
 from deployment.titiler.config import StackSettings
 from deployment.titiler.titiler_stacks import titilerLambdaStack, titilerECSStack
+from deployment.stac_api.stac_api import StacApiStack
 
 settings = StackSettings()
 
 app = core.App()
-
-perms = []
-if settings.buckets:
-    perms.append(
-        iam.PolicyStatement(
-            actions=["s3:GetObject", "s3:HeadObject"],
-            resources=[f"arn:aws:s3:::{bucket}*" for bucket in settings.buckets],
-        )
-    )
-
-# # If you use dynamodb mosaic backend you should add IAM roles to read/put Item and maybe create Table
-# stack = core.Stack()
-# perms.append(
-#     iam.PolicyStatement(
-#         actions=[
-#             "dynamodb:GetItem",
-#             "dynamodb:PutItem",
-#             "dynamodb:CreateTable",
-#             "dynamodb:Scan",
-#             "dynamodb:BatchWriteItem",
-#         ],
-#         resources=[f"arn:aws:dynamodb:{stack.region}:{stack.account}:table/*"],
-#     )
-# )
-
 
 # Tag infrastructure
 for key, value in {
@@ -43,26 +19,28 @@ for key, value in {
 
 DEPLOY_ENV = core.Environment(account='138863487738', region='us-east-1')
 
-ecs_stackname = f"{settings.name}-ecs-{settings.stage}"
 titilerECSStack(
     app,
-    ecs_stackname,
+    f"{settings.name}-ecs-{settings.stage}",
     cpu=settings.task_cpu,
     memory=settings.task_memory,
     mincount=settings.min_ecs_instances,
     maxcount=settings.max_ecs_instances,
-    permissions=perms,
     env=DEPLOY_ENV
 )
 
-lambda_stackname = f"{settings.name}-lambda-{settings.stage}"
-titilerLambdaStack(
+# titilerLambdaStack(
+#     app,
+#     f"{settings.name}-lambda-{settings.stage}",
+#     memory=settings.memory,
+#     timeout=settings.timeout,
+#     concurrent=settings.max_concurrent,
+#     env=DEPLOY_ENV
+# )
+
+StacApiStack(
     app,
-    lambda_stackname,
-    memory=settings.memory,
-    timeout=settings.timeout,
-    concurrent=settings.max_concurrent,
-    permissions=perms,
+    f"stac-api-{settings.stage}",
     env=DEPLOY_ENV
 )
 
