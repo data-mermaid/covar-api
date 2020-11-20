@@ -336,19 +336,29 @@ async def query_stac(mainSearch: mainSearch, page:int=1):
                 filters.append(key_filter)
 
     queries = {}
-    for filter in filters:
-        queries.update(**filter)
-    
+
     collections = []
     if(mainSearch.collections):
         collections = mainSearch.collections
     else:
         collections = ['landsat']
     results = {}
+
+    for collection_id in collections:
+        if(collection_id == 'dhw'):
+            key_filter = {}
+            filters.append(key_filter)
+        elif(collection_id == 'npp'):
+            key_filter = {}
+            filters.append(key_filter)
+
+    for filter in filters:
+        queries.update(**filter)
+    
+    
     
     for collection_id in collections:
         col = await getDB(collection_id)
-
         count = await do_count(collection_id, queries, limit)
 
         ''' --- sortby --- '''
@@ -425,7 +435,8 @@ async def sphere_query_test(sphereSearch: sphereSearch):
     
     key_filter = {
         "geometry": {"$nearSphere": { "$geometry": { "type": "Point", "coordinates": sphereSearch.point_coordinates}, "$minDistance": 0, "$maxDistance": sphereSearch.distance}}
-        #  $geoWithin: { $centerSphere: [ [ -88, 30 ], 10/3963.2 ] } 
+        # "$geoWithin": { "$centerSphere": [ [ -88, 30 ], 10/3963.2 ] } 
+        #"loc": {"$geoWithin": {"$center": [sphereSearch.point_coordinates, sphereSearch.distance]}}
     }
 
     filters.append(key_filter)
