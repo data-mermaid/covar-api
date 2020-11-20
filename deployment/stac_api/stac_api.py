@@ -73,15 +73,7 @@ class StacApiStack(core.Stack):
                     "PASSWORD": os.getenv("MONGO_PASS"),
                     "HOST": "stac-monog-1ADLUZEF6X1HP-70e2bcd902084e54.elb.us-east-1.amazonaws.com",
                 },
-                # secrets={
-                #     "MONGODB_KEY": ecs.Secret.from_secrets_manager(
-                #         mongodb_key
-                #     ),
-                # },
                 enable_logging=True,
-                # log_driver=ecs.LogDrivers.aws_logs(
-                #     stream_prefix="covar-api-stac", log_group=log_group
-                # ),
             ),
         )
 
@@ -99,11 +91,6 @@ class StacApiStack(core.Stack):
                     "MONGO_INITDB_ROOT_PASSWORD": os.getenv("MONGO_PASS") # TODO make more secure.
                 },
                 enable_logging=True,
-                # log_driver=ecs.LogDrivers.aws_logs(
-                #     stream_prefix="covar-api-stac", log_group=log_group
-                # ),
-                # task_role=,
-                # execution_role=,
             ),
             cluster=cluster,
             desired_count=1,
