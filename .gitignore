@@ -133,3 +133,4 @@ dmypy.json
 .vscode/
 
 cdk.out/
+titiler/
