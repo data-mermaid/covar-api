@@ -1,0 +1,643 @@
+{
+	"info": {
+		"_postman_id": "aa435c8f-d318-4827-98d3-d78f410ed03e",
+		"name": "discovery-mongo api localhost",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "/stac/",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost/stac",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"stac"
+					]
+				},
+				"description": "GET root catalog"
+			},
+			"response": []
+		},
+		{
+			"name": "/stac/collections",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost/stac/collections",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"stac",
+						"collections"
+					]
+				},
+				"description": "GET all collections"
+			},
+			"response": []
+		},
+		{
+			"name": "/stac/collections/sentinel-s2-l2a-cogs",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost/stac/collections/sentinel-s2-l2a-cogs",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"stac",
+						"collections",
+						"sentinel-s2-l2a-cogs"
+					]
+				},
+				"description": "GET collection by id - sentinel-s2-l2a-cogs"
+			},
+			"response": []
+		},
+		{
+			"name": "/stac/collections/landsat-8-l1-c1",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost/stac/collections/landsat-8-l1-c1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"stac",
+						"collections",
+						"landsat-8-l1-c1"
+					]
+				},
+				"description": "GET collection by id - landsat-8-l1-c1"
+			},
+			"response": []
+		},
+		{
+			"name": "/stac/collections/radarsat-1",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost/stac/collections/radarsat-1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"stac",
+						"collections",
+						"radarsat-1"
+					]
+				},
+				"description": "GET collection by id - landsat-8-l1-c1"
+			},
+			"response": []
+		},
+		{
+			"name": "/stac/collections/{collection_id}/items",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost/stac/collections/sentinel-s2-l2a-cogs/items?limit=10&datetime=2020-10-01T00:00:54.330495Z/..&bbox0=-110.04&bbox1=35.03&bbox2=-85.96&bbox3=45.95",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"stac",
+						"collections",
+						"sentinel-s2-l2a-cogs",
+						"items"
+					],
+					"query": [
+						{
+							"key": "limit",
+							"value": "10"
+						},
+						{
+							"key": "datetime",
+							"value": "2020-10-01T00:00:54.330495Z/.."
+						},
+						{
+							"key": "bbox0",
+							"value": "-110.04"
+						},
+						{
+							"key": "bbox1",
+							"value": "35.03"
+						},
+						{
+							"key": "bbox2",
+							"value": "-85.96"
+						},
+						{
+							"key": "bbox3",
+							"value": "45.95"
+						},
+						{
+							"key": "",
+							"value": "",
+							"disabled": true
+						}
+					]
+				},
+				"description": "GET items by collection id, datetime, bbox"
+			},
+			"response": []
+		},
+		{
+			"name": "/stac/collections/{collection_id}/items/{item_id}",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost/stac/collections/sentinel-s2-l2a-cogs/items/S2A_1KDV_20180913_0_L2A",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"stac",
+						"collections",
+						"sentinel-s2-l2a-cogs",
+						"items",
+						"S2A_1KDV_20180913_0_L2A"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": "",
+							"disabled": true
+						},
+						{
+							"key": "",
+							"value": "",
+							"disabled": true
+						},
+						{
+							"key": "",
+							"value": "",
+							"disabled": true
+						},
+						{
+							"key": "",
+							"value": "",
+							"disabled": true
+						},
+						{
+							"key": "",
+							"value": "",
+							"disabled": true
+						},
+						{
+							"key": "",
+							"value": "",
+							"disabled": true
+						},
+						{
+							"key": "",
+							"value": "",
+							"disabled": true
+						}
+					]
+				},
+				"description": "GET items by collection id, datetime, bbox"
+			},
+			"response": []
+		},
+		{
+			"name": "/stac/search",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost/stac/search?collections=sentinel-s2-l2a-cogs&limit=10&bbox0=-75&bbox1=1&bbox2=-72&bbox3=4&datetime=2020-01-27T00:00:00Z/2020-04-12T12:31:12Z&searchKey=eo:cloud_cover&searchValIntLt=20&searchValIntGt=15",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"stac",
+						"search"
+					],
+					"query": [
+						{
+							"key": "collections",
+							"value": "sentinel-s2-l2a-cogs"
+						},
+						{
+							"key": "limit",
+							"value": "10"
+						},
+						{
+							"key": "bbox0",
+							"value": "-75"
+						},
+						{
+							"key": "bbox1",
+							"value": "1"
+						},
+						{
+							"key": "bbox2",
+							"value": "-72"
+						},
+						{
+							"key": "bbox3",
+							"value": "4"
+						},
+						{
+							"key": "datetime",
+							"value": "2020-01-27T00:00:00Z/2020-04-12T12:31:12Z"
+						},
+						{
+							"key": "searchKey",
+							"value": "eo:cloud_cover"
+						},
+						{
+							"key": "searchValStr",
+							"value": "",
+							"disabled": true
+						},
+						{
+							"key": "searchValIntLt",
+							"value": "20"
+						},
+						{
+							"key": "searchValIntGt",
+							"value": "15"
+						}
+					]
+				},
+				"description": "GET items by collection id, datetime, bbox"
+			},
+			"response": []
+		},
+		{
+			"name": "/stac/search pt intersection",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost/stac/search?collections=radarsat-1&limit=10&ptIntersectA=-135.4&ptIntersectB=57.1&datetime=2010-01-27T00:00:00Z/2020-04-12T12:31:12Z",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"stac",
+						"search"
+					],
+					"query": [
+						{
+							"key": "collections",
+							"value": "radarsat-1"
+						},
+						{
+							"key": "limit",
+							"value": "10"
+						},
+						{
+							"key": "ptIntersectA",
+							"value": "-135.4"
+						},
+						{
+							"key": "ptIntersectB",
+							"value": "57.1"
+						},
+						{
+							"key": "bbox2",
+							"value": "-72",
+							"disabled": true
+						},
+						{
+							"key": "",
+							"value": "4",
+							"disabled": true
+						},
+						{
+							"key": "datetime",
+							"value": "2010-01-27T00:00:00Z/2020-04-12T12:31:12Z"
+						},
+						{
+							"key": "searchKey",
+							"value": "eo:cloud_cover",
+							"disabled": true
+						},
+						{
+							"key": "searchValStr",
+							"value": "",
+							"disabled": true
+						},
+						{
+							"key": "searchValIntLt",
+							"value": "20",
+							"disabled": true
+						},
+						{
+							"key": "searchValIntGt",
+							"value": "15",
+							"disabled": true
+						}
+					]
+				},
+				"description": "GET items by collection id, datetime, bbox"
+			},
+			"response": []
+		},
+		{
+			"name": "/stac/search",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"bbox\": [\n    -110.039063,35.029996,-85.957031,45.951150\n  ],\n  \"datetime\": \"2018-10-15T00:00:00Z/2018-11-01T12:31:12Z\",\n  \"intersects\": {\n    \"type\": \"string\",\n    \"coordinates\": [\n      null\n    ]\n  },\n  \"collections\": [\"sentinel-s2-l2a-cogs\"],\n  \"ids\": [\n    \"string\"\n  ],\n  \"limit\": 10,\n  \"properties\": {\n    \"eo:cloud_cover\": {\n      \"gt\": 0,\n      \"lt\": 100\n    },\n    \"platform\":\"sentinel-2b\"\n  }\n}",
+					"options": {
+						"raw": {}
+					}
+				},
+				"url": {
+					"raw": "http://localhost/stac/search",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"stac",
+						"search"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": "",
+							"disabled": true
+						}
+					]
+				},
+				"description": "Main search route"
+			},
+			"response": []
+		},
+		{
+			"name": "/stac/search properties",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"collections\": [\"sentinel-s2-l2a-cogs\"],\n  \"limit\": 10,\n  \"datetime\": \"2018-10-31T00:00:00Z/2018-11-01T12:31:12Z\",\n  \"properties\": {\n    \"instruments\": \"msi\",\n    \"sentinel:utm_zone\": 1,\n    \"eo:cloud_cover\": {\n      \"gt\": 1,\n      \"lt\": 2\n    },\n    \"platform\":\"sentinel-2b\"\n  }\n}",
+					"options": {
+						"raw": {}
+					}
+				},
+				"url": {
+					"raw": "http://localhost/stac/search",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"stac",
+						"search"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": "",
+							"disabled": true
+						}
+					]
+				},
+				"description": "Main search route"
+			},
+			"response": []
+		},
+		{
+			"name": "/stac/search sortby",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"collections\": [\"sentinel-s2-l2a-cogs\"],\n  \"limit\": 10,\n  \"datetime\": \"2018-10-31T00:00:00Z/2018-11-01T12:31:12Z\",\n  \"properties\": {\n    \"instruments\": \"msi\",\n    \"sentinel:utm_zone\": 1,\n    \"eo:cloud_cover\": {\n      \"gt\": 0,\n      \"lt\": 2\n    },\n    \"platform\":\"sentinel-2b\"\n  },\n  \"sortby\":[\n    {\n        \"field\":\"timestamp\",\n        \"direction\":\"desc\"\n    }]\n}\n   ",
+					"options": {
+						"raw": {}
+					}
+				},
+				"url": {
+					"raw": "http://localhost/stac/search",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"stac",
+						"search"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": "",
+							"disabled": true
+						}
+					]
+				},
+				"description": "Main search route"
+			},
+			"response": []
+		},
+		{
+			"name": "/stac/search intersects",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"datetime\": \"2018-10-01T00:00:00Z/2018-11-01T12:31:12Z\",\n  \"intersects\": {\n    \"type\": \"Polygon\",\n    \"coordinates\": [[\n        [-77.08248138427734, 38.788612962793636], \n        [-77.01896667480469, 38.788612962793636],\n        [-77.01896667480469, 38.835161408189364], \n        [-77.08248138427734, 38.835161408189364],\n        [-77.08248138427734, 38.788612962793636]\n    ]]\n  },\n  \"collections\": [\"sentinel-s2-l2a-cogs\"],\n  \"limit\": 100\n}",
+					"options": {
+						"raw": {}
+					}
+				},
+				"url": {
+					"raw": "http://localhost/stac/search",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"stac",
+						"search"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": "",
+							"disabled": true
+						}
+					]
+				},
+				"description": "Main search route"
+			},
+			"response": []
+		},
+		{
+			"name": "/stac/search intersects radarsat",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"datetime\": \"2010-10-01T00:00:00Z/2018-11-01T12:31:12Z\",\n  \"intersects\": {\n    \"type\": \"Box\",\n    \"coordinates\": [-137.137527,49.945034,-55.399246,69.896814]\n  },\n  \"collections\": [\"radarsat-1\"],\n  \"limit\": 100\n}",
+					"options": {
+						"raw": {}
+					}
+				},
+				"url": {
+					"raw": "http://localhost/stac/search",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"stac",
+						"search"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": "",
+							"disabled": true
+						}
+					]
+				},
+				"description": "Main search route"
+			},
+			"response": []
+		},
+		{
+			"name": "/stac/search intersects bbox",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"datetime\": \"2018-10-01T00:00:00Z/2018-11-01T12:31:12Z\",\n  \"intersects\": {\n    \"type\": \"Box\",\n    \"coordinates\": [-92.425796,34.667594,-92.263245,34.775832]\n  },\n  \"collections\": [\"sentinel-s2-l2a-cogs\"],\n  \"limit\": 100\n}",
+					"options": {
+						"raw": {}
+					}
+				},
+				"url": {
+					"raw": "http://localhost/stac/search",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"stac",
+						"search"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": "",
+							"disabled": true
+						}
+					]
+				},
+				"description": "Main search route"
+			},
+			"response": []
+		},
+		{
+			"name": "/stac/dev/searchCloud",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"collection_id\": \"sentinel-s2-l2a-cogs\",\n  \"limit\": 10,\n  \"cloud_cover\": 10,\n  \"bbox\": [\n    -110.039063,35.029996,-85.957031,45.951150\n  ],\n  \"start_date\": \"2018-10-01T00:00:00Z\",\n  \"end_date\": \"2018-11-01T12:31:12Z\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost/stac/dev/searchCloud",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"stac",
+						"dev",
+						"searchCloud"
+					]
+				},
+				"description": "Slimmed down search for rastervision"
+			},
+			"response": []
+		},
+		{
+			"name": "/stac/dev/spheretest",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"limit\": 1000,\n  \"collections\": \"sentinel-s2-l2a-cogs\",\n  \"point_coordinates\": [\n    -98.1, 37.2\n  ],\n  \"distance\": 0.1\n}"
+				},
+				"url": {
+					"raw": "http://localhost/stac/dev/spheretest",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"stac",
+						"dev",
+						"spheretest"
+					]
+				},
+				"description": "Search a sphere."
+			},
+			"response": []
+		},
+		{
+			"name": "/stac/dev/addItem",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"collection\": \"hack\",\n  \"item\": {\n  \"stac_version\": \"1.0.0-beta.2\",\n  \"stac_extensions\": [],\n  \"type\": \"Feature\",\n  \"id\": \"CS3-20160503_132130_04\",\n  \"bbox\": [-122.59750209, 37.48803556, -122.2880486, 37.613537207],\n  \"geometry\": {\n    \"type\": \"Polygon\",\n    \"coordinates\": [\n      [\n        [-122.308150179, 37.488035566],\n        [-122.597502109, 37.538869539],\n        [-122.576687533, 37.613537207],\n        [-122.288048600, 37.562818007],\n        [-122.308150179, 37.488035566]\n      ]\n    ]\n  },\n  \"properties\": {\n    \"datetime\": \"2016-05-03T13:21:30.040Z\",\n    \"collection\": \"CS3\"\n  },\n  \"links\": [\n    {\n      \"rel\": \"self\",\n      \"href\": \"http://cool-sat.com/catalog/CS3-20160503_132130_04/CS3-20160503_132130_04.json\"\n    },\n    {\n      \"rel\": \"collection\",\n      \"href\": \"http://cool-sat.com/catalog.json\"\n    }\n  ],\n  \"assets\": {\n    \"analytic\": {\n      \"href\": \"relative-path/to/analytic.tif\",\n      \"title\": \"4-Band Analytic\"\n    },\n    \"thumbnail\": {\n      \"href\": \"http://cool-sat.com/catalog/CS3-20160503_132130_04/thumbnail.png\",\n      \"title\": \"Thumbnail\",\n      \"roles\": [ \"thumbnail\" ]\n    }\n  }\n }\n}"
+				},
+				"url": {
+					"raw": "http://localhost/stac/dev/addItem",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"stac",
+						"dev",
+						"addItem"
+					]
+				},
+				"description": "Add an item. "
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

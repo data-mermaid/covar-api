@@ -1,0 +1,15 @@
+version: '3.1'
+
+volumes:
+  mongo_data:
+
+services:
+  stac_server:
+    build: .
+    command: uvicorn main:app --host 0.0.0.0 --port 80 --reload
+    volumes:
+      - ./STAC:/STAC
+    ports:
+      - "80:80"
+    env_file:
+      - .env

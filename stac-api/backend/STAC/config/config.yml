@@ -1,0 +1,7 @@
+fastapi:
+  debug: true
+databases:
+  default:
+    ENGINE: mongodb
+    DRIVER: motor
+    NAME: stac

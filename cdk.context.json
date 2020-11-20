@@ -1,0 +1,69 @@
+{
+  "availability-zones:account=138863487738:region=us-east-1": [
+    "us-east-1a",
+    "us-east-1b",
+    "us-east-1c",
+    "us-east-1d",
+    "us-east-1e",
+    "us-east-1f"
+  ],
+  "hosted-zone:account=138863487738:domainName=tessellata.net:region=us-east-1": {
+    "Id": "/hostedzone/Z06463809GQ6E36CHKK",
+    "Name": "tessellata.net."
+  },
+  "vpc-provider:account=138863487738:filter.tag:Name=dev-base-infrastructure/vpc:region=us-east-1:returnAsymmetricSubnets=true": {
+    "vpcId": "vpc-091428947a9a2f80d",
+    "vpcCidrBlock": "10.0.0.0/16",
+    "availabilityZones": [],
+    "subnetGroups": [
+      {
+        "name": "Public",
+        "type": "Public",
+        "subnets": [
+          {
+            "subnetId": "subnet-0a2eb62db0d8857c0",
+            "cidr": "10.0.0.0/24",
+            "availabilityZone": "us-east-1a",
+            "routeTableId": "rtb-0b67320b502d50bb4"
+          },
+          {
+            "subnetId": "subnet-06b3ff4be366775df",
+            "cidr": "10.0.1.0/24",
+            "availabilityZone": "us-east-1b",
+            "routeTableId": "rtb-022d4c57c7c9c6474"
+          },
+          {
+            "subnetId": "subnet-00aeb3cd6c80b2fe4",
+            "cidr": "10.0.2.0/24",
+            "availabilityZone": "us-east-1c",
+            "routeTableId": "rtb-09e443dd132741af0"
+          }
+        ]
+      },
+      {
+        "name": "Private",
+        "type": "Private",
+        "subnets": [
+          {
+            "subnetId": "subnet-076f7468999440e2d",
+            "cidr": "10.0.16.0/20",
+            "availabilityZone": "us-east-1a",
+            "routeTableId": "rtb-0b61c14d908f51971"
+          },
+          {
+            "subnetId": "subnet-00917194de5b347e0",
+            "cidr": "10.0.32.0/20",
+            "availabilityZone": "us-east-1b",
+            "routeTableId": "rtb-0357b51c0f49f5f7c"
+          },
+          {
+            "subnetId": "subnet-0b8037addb2a47a07",
+            "cidr": "10.0.48.0/20",
+            "availabilityZone": "us-east-1c",
+            "routeTableId": "rtb-029064f5612901a04"
+          }
+        ]
+      }
+    ]
+  }
+}
