@@ -24,6 +24,12 @@ async def do_count(collection_id, query, limit):
 async def getDB(collection_id):
     if(collection_id == 'sentinel-s2-l2a-cogs'):
         col = DB.sentinel_cogs
+    elif(collection_id == 'dhw'):
+        col = DB.DHW
+    elif(collection_id == 'npp'):
+        col = DB.NPP
+    elif(collection_id == 'water_pollution'):
+        col = DB.water_pollution
     elif(collection_id == 'digitalglobe'):
         col = DB.digitalglobe
     elif(collection_id == 'sentinel-2-l1c'):
