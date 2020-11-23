@@ -45,7 +45,7 @@ class StacApiStack(core.Stack):
             domain_zone=route53.HostedZone.from_lookup(
                 self, "HostedZone", domain_name='tessellata.net'
             ),
-            domain_name='api.tessellata.net',
+            domain_name='api.tessellata.net', # NOTE: this creates the route 53 record!!
             certificate=certs.Certificate.from_certificate_arn(
                 self, 'domain-cert',
                 certificate_arn='arn:aws:acm:us-east-1:138863487738:certificate/2832b798-d241-4d89-8b11-bdc9a377f173'
@@ -66,7 +66,7 @@ class StacApiStack(core.Stack):
                 ),
                 container_port=8080,
                 environment={
-                    "STAC_URL": "http://api.tessellata.net",
+                    "STAC_URL": "http://api.tessellata.net", # NOTE: this record gets created dynamically.
                     "TITILER_ENDPOINT": "https://titiler.tessellata.net",
                     "PORT": "27017",
                     "USER": os.getenv("MONGO_USER"),
